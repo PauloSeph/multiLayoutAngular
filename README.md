@@ -1,2 +1,0 @@
-# multiLayoutAngular
-Tests multiLayout
