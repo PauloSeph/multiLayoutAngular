@@ -35,30 +35,83 @@
 //   border-radius: 4px;
 // }
 
+//flexbox
+
+// .box {
+//   display: flex;
+//   width: 80%;
+//   height: auto;
+//   margin-top: 6rem;
+//   margin-left: auto;
+//   margin-right: auto;
+//   border-radius: 0.5rem;
+//   border: 1px solid rgb(57, 145, 114);
+//   padding: 3rem;
+// }
+
+// .test {
+//   background-color: rgb(37, 41, 41);
+//   display: flex;
+//   flex-wrap: wrap;
+// }
+
+
+// .campo {
+//   display: flex;
+//   width: 50%;
+//   flex-direction: column;
+//   padding: 2rem;
+//   font-size: 1.2rem;
+//   color: aliceblue;
+// }
+
+// .tamanhoCampo {
+//   height: 2rem;
+//   border-radius: 5px;
+//   margin-top: 10px;
+// }
+
+// .criar {
+//   margin-left: 93%;
+//   margin-top: 1rem;
+//   width: 4rem;
+//   height: 2rem;
+// }
+
+
+//flex 2
+
 .container {
   display: flex;
-  flex-direction: column;
-  // background-color: rgb(88, 64, 35);
   flex-wrap: wrap;
-  width: 80%;
-  height: 80%;
-  margin-top: 5rem;
+  height: 500px;
+  width: 50vw;
   margin-left: auto;
   margin-right: auto;
-  border-radius: 0.5rem;
-  border: 2px solid chocolate;
+  margin-top: 3rem;
+  padding-bottom: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-content: space-around;
 }
 
-.campoNome {
-  margin-top: 2rem;
-  width: auto;
-  height: auto;
-  background-color: antiquewhite;
+.campo {
+  flex-basis: 49%;
+  padding: 0.8rem;
   display: flex;
   flex-direction: column;
+  align-self: flex-end;
+  background-color: rgb(37, 99, 99);
+  font-size: 1.2rem;
+  border-radius: 10px;
+  margin-right: 2px;
+  margin-bottom: 1px;
+  color: aliceblue;
 }
 
-.tamanhoCampo {
-  width: 50%;
+
+
+.tamanhoCampo{
   height: 2rem;
+  border-radius: 4px;
 }
