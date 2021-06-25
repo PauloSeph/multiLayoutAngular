@@ -1,0 +1,112 @@
+input {
+  height: 2rem;
+  border-radius: 0.2rem;
+  border: solid 1px lightgray;
+  padding-left: 0.5rem;
+  font-size: 1rem;
+  margin-top: 0.2rem;
+}
+
+.label {
+  font-size: 1.2rem;
+  font-family: Arial;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  width: 70%;
+  height: 80%;
+  margin: 2.5rem auto auto auto;
+  padding: 2rem;
+}
+
+header {
+  grid-column: 1 / 13;
+  grid-row: 1;
+  margin-bottom: 1rem;
+}
+
+.formulario {
+  display: grid;
+  grid-column: 1 / 13;
+  grid-row: 2 / 10;
+  grid-template-columns: repeat(12, 1fr);
+  grid-column-gap: 1rem;
+  border-radius: 0.6rem;
+  border: 1px solid lightgray;
+  padding: 2rem 2rem 2rem 2rem;
+}
+
+.campoNome {
+  grid-column: 1 / 5;
+  grid-row: 2 / 3;
+  @extend .flex;
+}
+
+.campoEmail {
+  grid-column: 5 / 10;
+  grid-row: 2 / 3;
+  @extend .flex;
+}
+
+.nickname {
+  grid-column: 10 / 13;
+  grid-row: 2 / 3;
+  @extend .flex;
+}
+
+.nomeUsuario {
+  // background-color: red;
+  grid-column: 1 / 6;
+  grid-row: 3 / 5;
+  @extend .flex;
+}
+
+.senha {
+  grid-column: 6 / 13;
+  grid-row: 3 / 5;
+  @extend .flex;
+}
+
+.funcao {
+  grid-column: 1 / 4;
+  grid-row: 5 / 10;
+}
+
+.tipo {
+  grid-column: 4 / 7;
+  grid-row: 5 / 10;
+}
+
+select {
+  display: flex;
+  margin-top: 4px;
+  color: rgb(0, 0, 0);
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(33, 65, 102, 0.555);
+  border-radius: 0.3rem;
+  border: 1px solid rgb(156, 168, 206);
+  width: 60%;
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
+}
+
+button {
+  grid-column: 11 / 13;
+  grid-row: 10;
+  height: 2.7rem;
+  align-self: end;
+  background-color: rgb(43, 93, 185);
+  color: aliceblue;
+  font-weight: 700;
+  border-radius: 0.3rem;
+  border: solid 1px lightcyan;
+  margin-right: 0.3rem;
+}
