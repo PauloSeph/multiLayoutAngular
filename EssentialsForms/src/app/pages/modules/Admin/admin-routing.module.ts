@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AdminLayoutComponent } from 'src/app/_layout/dashboard/admin-layout.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { AdminHomeComponent } from './dashboard/admin-home/adminHome.component';
+import { UserRegisterComponent } from './dashboard/user/user-register/user-register.component';
+import { UsersComponent } from './dashboard/user/users/users.component';
 
-import { AdminHomeComponent } from './component/adminHome.component';
-import { UserRegisterComponent } from './component/user-register/user-register.component';
 
 
 
@@ -18,6 +20,9 @@ const routes: Routes = [
       path: 'dashboard', children: [
         {
           path: '', component: AdminHomeComponent
+        },
+        {
+          path: 'users', component: UsersComponent
         },
         {
           path: 'userRegister', component: UserRegisterComponent
