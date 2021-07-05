@@ -1,0 +1,45 @@
+<form class="form" [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+  <div class="form-group" [ngClass]="aplicaCssError('nome')">
+    <!-- Input Nome -->
+    <div class="row">
+      <div class="col-md-12">
+        <label for="nome" class="form-label">Nome</label>
+
+        <input type="text" class="form-control"
+        id="nome"
+        placeholder="nome"
+        formControlName="nome"
+        >
+      </div>
+    </div>
+
+    <app-campo-control-error
+     [mostrarErro]="!formulario.controls['nome'].valid && formulario.controls['nome'].touched "
+     msgErro="Nome é obrigatório">
+    </app-campo-control-error>
+  </div>
+
+  <div class="form-group">
+    <!-- Input email -->
+    <div class="row">
+      <div class="col-md-12">
+        <label for="email" class="form-label">Email</label>
+
+        <input type="text" class="form-control"
+        id="email"
+        placeholder="email"
+        formControlName="email"
+        >
+      </div>
+    </div>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary mb-3 mt-4" >Submit</button>
+  <button class="btn btn-danger mb-3 mt-4 ml-2" (click)="resetar()" >Cancelar</button>
+
+  <app-form-debug [form]="formulario"></app-form-debug>
+</form>
+
+
