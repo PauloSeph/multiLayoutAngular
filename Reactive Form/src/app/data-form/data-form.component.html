@@ -57,7 +57,7 @@
       <div class="col-md-3" [ngClass]="aplicaCssError('endereco.cep')">
         <label for="cep" class="form-label">CEP</label>
         <input type="text" class="form-control" id="cep"
-        formControlName="cep"
+        formControlName="cep" (blur)="consultaCep()"
         >
 
         <app-campo-control-error
