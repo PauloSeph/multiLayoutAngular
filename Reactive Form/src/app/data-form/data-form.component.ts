@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { DropdownService } from '../shared/services/dropdown.service';
+
+
 
 @Component({
   selector: 'app-data-form',
@@ -13,18 +15,22 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./data-form.component.scss'],
 })
 export class DataFormComponent implements OnInit {
+
   formulario!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+
+
+  constructor(
+    private formBuilder: FormBuilder,
+     private http: HttpClient,
+     private dropdownService: DropdownService
+     ) {}
 
   ngOnInit(): void {
-    // this.formulario = new FormGroup({
-    //   endereco: new FormGroup({
-    //     cep: new FormControl(null),
-    //     numero: new FormControl(null),
-    //     complemento: new FormControl(null)
-    //   })
-    // })
+
+    this.dropdownService.getEstadosBr().subscribe((dados) => {
+      console.log(dados)
+    })
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -42,9 +48,10 @@ export class DataFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.formulario.value);
+    console.log(this.formulario);
 
-    this.http
+    if(this.formulario.valid) {
+      this.http
       .post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
       .subscribe(
         (dados) => {
@@ -53,7 +60,27 @@ export class DataFormComponent implements OnInit {
         },
         (error: any) => alert('Erro')
       );
+    }
+    else {
+      console.log('Formulário invalido')
+      this.verificaValidacoesForm(this.formulario);
+      }
+    }
+
+
+  public verificaValidacoesForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach((campo) => {
+      console.log(campo);
+      const controle = formGroup.get(campo);
+      controle?.markAsDirty();
+      if(controle instanceof FormGroup){
+        this.verificaValidacoesForm(controle);
+      }
+    });
   }
+
+
+
 
   resetar() {
     this.formulario.reset();
@@ -61,7 +88,8 @@ export class DataFormComponent implements OnInit {
 
   public verificValidTouched(campo: string): any {
     return (
-      !this.formulario.get(campo)?.valid && this.formulario.get(campo)?.touched
+      !this.formulario.get(campo)?.valid &&
+      (this.formulario.get(campo)?.touched || this.formulario.get(campo)?.dirty)
     );
   }
 

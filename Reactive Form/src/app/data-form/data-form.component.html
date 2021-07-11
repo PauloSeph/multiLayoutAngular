@@ -15,7 +15,7 @@
     </div>
 
     <app-campo-control-error
-     [mostrarErro]="!formulario.controls['nome'].valid && formulario.controls['nome'].touched "
+     [mostrarErro]="verificValidTouched('nome')"
      msgErro="Nome é obrigatório">
     </app-campo-control-error>
   </div>
@@ -155,7 +155,9 @@
 
 </div>
   <button type="submit" class="btn btn-primary mb-3 mt-4" >Submit</button>
-  <button class="btn btn-danger mb-3 mt-4 ml-2" (click)="resetar()" >Cancelar</button>
+  <button class="btn btn-danger mb-3 mt-4 ml-2"
+  (click)="resetar()">Cancelar
+  </button>
 
 
 
