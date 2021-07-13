@@ -1,0 +1,20 @@
+<ul class="nav nav-pills navbar-dark bg-dark" >
+  <li class="nav-item">
+    <a class="nav-link" href="#">Http</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+     [routerLink]="['/']"
+     routerLinkActive="active">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link"
+    [routerLink]="['/cursos']"
+    routerLinkActive="active">Cursos</a>
+  </li>
+
+</ul>
+
+<div class="container">
+  <router-outlet></router-outlet>
+</div>
