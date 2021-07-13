@@ -142,7 +142,12 @@
       <!-- Estado -->
       <div class="col-md-3" [ngClass]="aplicaCssError('endereco.estado')">
         <label for="estado" class="form-label">Estado</label>
-        <input type="text" class="form-control" id="estado" formControlName="estado" >
+
+        <select class="form-control" id="estado" formControlName="estado">
+          <option *ngFor="let estado of estados">{{ estado.nome }}</option>
+
+
+        </select>
 
         <app-campo-control-error
         [mostrarErro]="verificValidTouched('endereco.estado')"

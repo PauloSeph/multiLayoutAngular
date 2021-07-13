@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { DropdownService } from '../shared/services/dropdown.service';
-
-
+import { ConsultaCepService } from '../service/consulta-cep.service';
+import { EstadoBrasileiro } from '../shared/models/estado-brasileiro';
 
 @Component({
   selector: 'app-data-form',
@@ -17,20 +13,21 @@ import { DropdownService } from '../shared/services/dropdown.service';
 export class DataFormComponent implements OnInit {
 
   formulario!: FormGroup;
-
-
+  estados: any;
+  test: any;
 
   constructor(
     private formBuilder: FormBuilder,
-     private http: HttpClient,
-     private dropdownService: DropdownService
-     ) {}
+    private http: HttpClient,
+    private dropdownService: DropdownService,
+    private cepService: ConsultaCepService
+  ) {}
 
   ngOnInit(): void {
-
-    this.dropdownService.getEstadosBr().subscribe((dados) => {
-      console.log(dados)
-    })
+    this.dropdownService.getEstadosBr().subscribe( dados => {
+      console.log(dados);
+      this.estados = dados;
+    });
 
     this.formulario = this.formBuilder.group({
       nome: [null, Validators.required],
@@ -50,37 +47,32 @@ export class DataFormComponent implements OnInit {
   onSubmit() {
     console.log(this.formulario);
 
-    if(this.formulario.valid) {
+    if (this.formulario.valid) {
       this.http
-      .post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-      .subscribe(
-        (dados) => {
-          console.log(dados);
-          // this.resetar();
-        },
-        (error: any) => alert('Erro')
-      );
-    }
-    else {
-      console.log('Formulário invalido')
+        .post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
+        .subscribe(
+          (dados) => {
+            console.log(dados);
+            // this.resetar();
+          },
+          (error: any) => alert('Erro')
+        );
+    } else {
+      console.log('Formulário invalido');
       this.verificaValidacoesForm(this.formulario);
-      }
     }
-
+  }
 
   public verificaValidacoesForm(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach((campo) => {
       console.log(campo);
       const controle = formGroup.get(campo);
       controle?.markAsDirty();
-      if(controle instanceof FormGroup){
+      if (controle instanceof FormGroup) {
         this.verificaValidacoesForm(controle);
       }
     });
   }
-
-
-
 
   resetar() {
     this.formulario.reset();
@@ -107,25 +99,14 @@ export class DataFormComponent implements OnInit {
     };
   }
 
-  consultaCep(): any {
+  consultaCep(): void {
     let cep = this.formulario.get('endereco.cep')?.value;
 
-    // Somente numeros, qualquer coisa diferente é transformado em stringvazia
-    cep = cep.replace(/\D/g, '');
-
-    let validacep: any;
-
-    // Expressão para validar numero e quantidade de digitos
-    if (cep != '') {
-      validacep = /^[0-9]{8}$/;
-
-      // Validar o formato do CEP
-      if (validacep.test(cep)) {
-        this.resetaDadosForm();
-        this.http
-          .get(`//viacep.com.br/ws/${cep}/json`)
-          .subscribe((dados) => this.populaDadosForm(dados));
-      }
+    if (cep != null && cep !== '') {
+      this.cepService.consultaCep(cep).subscribe((dados) => {
+        console.log(dados)
+        this.populaDadosForm(dados);
+      });
     }
   }
 
@@ -133,14 +114,12 @@ export class DataFormComponent implements OnInit {
     this.formulario.patchValue({
       endereco: {
         rua: dados.logradouro,
-        // cep: dados.cep,
-        complemento: dados.complemento,
         bairro: dados.bairro,
-        cidade: dados.cidade,
-        estado: dados.estado,
+        cidade: dados.localidade,
+        estado: dados.uf,
       },
     });
-    this.formulario.get('nome')?.setValue('joaquin')
+    this.formulario.get('nome')?.setValue('joaquin');
   }
 
   resetaDadosForm() {
@@ -153,6 +132,5 @@ export class DataFormComponent implements OnInit {
         estado: null,
       },
     });
-
   }
 }
