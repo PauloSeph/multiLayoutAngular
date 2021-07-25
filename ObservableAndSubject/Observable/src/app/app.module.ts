@@ -1,18 +1,22 @@
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { BasicComponent } from './basic/basic.component';
+import { ColdObComponent } from './cold-ob/cold-ob.component';
+import { HotObComponent } from './hot-ob/hot-ob.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    BasicComponent,
+    ColdObComponent,
+    HotObComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

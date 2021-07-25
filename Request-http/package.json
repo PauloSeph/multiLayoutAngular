@@ -2,6 +2,7 @@
   "name": "request-http",
   "version": "0.0.0",
   "scripts": {
+    "db": "json-server --watch jsonDb.json --port 3001",
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
