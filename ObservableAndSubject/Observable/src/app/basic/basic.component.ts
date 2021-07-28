@@ -8,6 +8,8 @@ import { Observable, Observer, Subscription } from 'rxjs';
 })
 export class BasicComponent implements OnInit {
 
+
+
   subscription1?: Subscription;
   subscription2?: Subscription;
 
@@ -20,8 +22,17 @@ export class BasicComponent implements OnInit {
 
   constructor() { }
 
+
+
   ngOnInit(): void {
     // Async
+    const socket = new WebSocket('ws://someurl');
+
+    const source = new Observable((observer) => {
+      socket.addEventListener('message', (e) => observer.next(e));
+    });
+
+
 
     const intervalo = new Observable(
       (observer: Observer<any>) => {
@@ -61,6 +72,26 @@ export class BasicComponent implements OnInit {
         this.subscription2?.unsubscribe();
       }, 11000);
 
+
+      const firstObservable = new Observable(
+        (observer: Observer<number>) => {
+          observer.next(120);
+          observer.next(110);
+          observer.next(100);
+          setTimeout(() => {
+            observer.next(150);
+            observer.complete()
+          }, 3000);
+        }
+      )
+
+      firstObservable.subscribe( (dados) => {
+        console.log(dados)
+      })
+
   }
+
+
+
 }
 

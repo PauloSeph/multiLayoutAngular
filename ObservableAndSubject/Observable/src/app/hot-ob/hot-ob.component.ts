@@ -24,7 +24,22 @@ export class HotObComponent implements OnInit {
     myBtn.subscribe(
       (evento) => console.log('Botão Clicado 2')
     )
+
+
+    class Producer {
+      private myListener = [];
+      private n = 0;
+
+     addListener(lis: any) {
+
+        this.myListener.push()
+
+      }
+
+    }
+
   }
+
 
 
 

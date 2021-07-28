@@ -5,20 +5,19 @@ const obs = Observable.create(subscriber => {
     subscriber.next('Está')
     subscriber.next('Sendo')
     subscriber.next('Chamado')
-
-    if(Math.random() > 0.5) {
-
-    } else {
-        
-    }
-
     subscriber.next('Fim')
-    subscriber.complete()
 
-
+    if (Math.random() > 0.5) {
+        subscriber.complete()
+    } else {
+         throw "Erro"
+    }
 })
 
-obs.subscribe((texto) => {
-    console.log(texto)
-})
+obs.subscribe(
+    (texto) => console.log(texto),
+    (error) => console.log(error),
+    () => console.log('Completado')
+)
+
 
