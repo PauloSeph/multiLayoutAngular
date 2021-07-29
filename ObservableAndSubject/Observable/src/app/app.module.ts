@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { BasicComponent } from './basic/basic.component';
 import { ColdObComponent } from './cold-ob/cold-ob.component';
 import { HotObComponent } from './hot-ob/hot-ob.component';
+import { HotobSubjectComponent } from './hotob-subject/hotob-subject.component';
+import { SubjectsComponent } from './subjects/subjects.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicComponent,
     ColdObComponent,
-    HotObComponent
+    HotObComponent,
+    HotobSubjectComponent,
+    SubjectsComponent
   ],
   imports: [
     BrowserModule,
