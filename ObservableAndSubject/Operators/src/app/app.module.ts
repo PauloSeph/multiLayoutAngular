@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BasicComponent } from './components/basic/basic.component';
 import { OpTransformComponent } from './components/op-transform/op-transform.component';
+import { FilteringComponent } from './components/filtering/filtering.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BasicComponent,
-    OpTransformComponent
+    OpTransformComponent,
+    FilteringComponent
   ],
   imports: [
     BrowserModule,
