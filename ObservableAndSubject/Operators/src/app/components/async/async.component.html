@@ -1,0 +1,12 @@
+<p>astnc works!</p>
+
+<div *ngIf="user|async as seila; else loadinguser2">
+  <p>Name: {{ seila.name }}</p>
+  <p>Login: {{ seila.login }}</p>
+</div>
+
+<ng-template #loadinguser2>
+  <p>lalal</p>
+</ng-template>
+
+

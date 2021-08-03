@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { from, fromEvent, interval, Observable, of } from 'rxjs';
-import { delay, filter, first, last, map, take, tap } from 'rxjs/operators';
+import { interval, Observable, of, fromEvent, from, Subject } from 'rxjs';
+import { debounceTime, delay, filter, first, last, map, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-filtering',
@@ -11,13 +11,24 @@ export class FilteringComponent implements OnInit {
 
   constructor() { }
 
+  valoresDoInput: string = '';
+
+  // public novas: any;
+
+  // nova(){
+  //   return from([this.valoresDoInput])
+  // }
+
+  // outros(){
+  //   this.nova().pipe(
+  //     debounceTime(1000)
+  //   )
+  //   .subscribe(v => console.log(v))
+  // }
+
   ngOnInit(): void {
-    // this.outro()
-    // this.takeClick();
-    this.launchRippe()
-
+    // this.outros();
   }
-
 
   filtrando() {
 
@@ -78,12 +89,12 @@ export class FilteringComponent implements OnInit {
 
   firstClick(){
 
-    const meuOb = from([1, 2, 3, 4, 5, 6]);
+    // const meuOb = from([1, 2, 3, 4, 5, 6]);
 
-    meuOb.pipe(
-      first(valores => typeof valores === 'string', 'gatin')
-    )
-    .subscribe(v => console.error(v))
+    // meuOb.pipe(
+    //   first(valores => typeof valores === 'string', 'gatin')
+    // )
+    // .subscribe(v => console.error(v))
 
     // const source = from(['x', 'y', 'z']);
     // const example = source.pipe(last());
@@ -102,10 +113,15 @@ export class FilteringComponent implements OnInit {
 
   launchRippe() {
     const source = fromEvent(document, 'click')
+    .pipe(
+      debounceTime(1000)
+    )
     .subscribe(e => {
       console.log('Click with DebounceTime: ', e);
     })
 
   }
+
+
 
 }
