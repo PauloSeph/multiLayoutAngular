@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { Filteringpt2Component } from './components/filteringpt2/filteringpt2.component';
 import { PipeAsyncComponent } from './components/pipe-async/pipe-async.component';
 import { AsyncComponent } from './components/async/async.component';
+import { ErrorHandlingComponent } from './components/error-handling/error-handling.component';
+import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { AsyncComponent } from './components/async/async.component';
     FilteringComponent,
     Filteringpt2Component,
     PipeAsyncComponent,
-    AsyncComponent
+    AsyncComponent,
+    ErrorHandlingComponent,
+    DragAndDropComponent
   ],
   imports: [
     BrowserModule,
