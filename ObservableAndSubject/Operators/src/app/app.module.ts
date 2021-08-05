@@ -12,6 +12,7 @@ import { PipeAsyncComponent } from './components/pipe-async/pipe-async.component
 import { AsyncComponent } from './components/async/async.component';
 import { ErrorHandlingComponent } from './components/error-handling/error-handling.component';
 import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.component';
+import { UnsubscribeComponent } from './components/unsubscribe/unsubscribe.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DragAndDropComponent } from './components/drag-and-drop/drag-and-drop.c
     PipeAsyncComponent,
     AsyncComponent,
     ErrorHandlingComponent,
-    DragAndDropComponent
+    DragAndDropComponent,
+    UnsubscribeComponent
   ],
   imports: [
     BrowserModule,

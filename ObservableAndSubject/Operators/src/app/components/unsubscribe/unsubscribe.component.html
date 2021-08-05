@@ -1,0 +1,13 @@
+<p>unsubscribe works!</p>
+
+<div *ngIf="subscriptionActive">
+  Habilitado?
+</div>
+
+<div>
+  <button [disabled]="!subscriptionActive"
+  >
+  <!-- (click)="" -->
+  Unsubscribe em Todos!
+  </button>
+</div>
