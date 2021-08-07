@@ -13,22 +13,31 @@ import { tap } from 'rxjs/operators';
 })
 export class PocUnsubComponent implements OnInit, OnDestroy {
 
-  nome = 'Componente com unsubscribe';
-  valor: string;
 
-  sub: Subscription[] = [];
+  nome = 'Component Com Unsubscribe'
+  valor!: string;
+
+  sub?: Subscription[] = [];
 
   constructor(private service: EnviarValorService) { }
 
   ngOnInit() {
-    this.sub.push(this.service.getValor()
-      .pipe(tap(v => console.log(this.nome, v)))
-      .subscribe(novoValor => this.valor = novoValor));
+    this.sub?.push(
+      this.service.emissor$
+      .pipe(tap(valor => console.log(this.nome, valor)))
+      .subscribe((novoValor) => {
+        this.valor = novoValor
+      }))
+
+
   }
 
   ngOnDestroy() {
-    this.sub.forEach(s => s.unsubscribe());
-    console.log(`${this.nome} foi destruido`);
+    console.log(`${this.nome} Foi destruído`)
+    this.sub?.forEach( valor => {
+      valor.unsubscribe()
+    })
   }
+
 
 }

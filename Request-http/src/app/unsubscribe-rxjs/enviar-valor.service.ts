@@ -8,13 +8,13 @@ export class EnviarValorService {
 
   constructor() { }
 
-  private emissor$ = new Subject<string>();
+  private _emissor$ = new Subject<string>();
 
   emitirValor(valor: string) {
-    this.emissor$.next(valor);
+    this._emissor$.next(valor);
   }
 
-  getValor() {
-    return this.emissor$.asObservable();
+  get emissor$(){
+    return this._emissor$.asObservable();
   }
 }

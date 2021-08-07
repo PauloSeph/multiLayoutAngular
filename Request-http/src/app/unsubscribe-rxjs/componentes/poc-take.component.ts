@@ -12,21 +12,27 @@ import { tap, take } from 'rxjs/operators';
 })
 export class PocTakeComponent implements OnInit, OnDestroy {
 
-  nome = 'Componente com take';
-  valor: string;
+  nome: string = 'Component Com OP. TakeUntil';
+  valor!: string;
 
-  constructor(private service: EnviarValorService) {}
+   constructor(
+    private service: EnviarValorService
+    ) { }
 
-  ngOnInit() {
-    this.service.getValor()
-      .pipe(
-        tap(v => console.log(this.nome, v)),
-        take(1)
-      )
-      .subscribe(novoValor => this.valor = novoValor);
+
+  ngOnInit(){
+    this.service.emissor$
+    .pipe(
+      tap(valor => console.log(this.nome, valor)),
+      take(1)
+    )
+    .subscribe(
+      novoValor => this.valor = novoValor
+    )
   }
 
+
   ngOnDestroy() {
-    console.log(`${this.nome} foi destruido`);
+    console.log(`${this.nome} Foi destruído`)
   }
 }

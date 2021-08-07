@@ -14,17 +14,17 @@ import { Observable } from 'rxjs';
 export class PocAsyncComponent implements OnInit, OnDestroy {
 
   nome = 'Componente com async';
-  valor$: Observable<string>;
+  valor$!: Observable<string>;
 
   constructor(private service: EnviarValorService) { }
 
   ngOnInit() {
-    this.valor$ = this.service.getValor()
-      .pipe(tap(v => console.log(this.nome, v)));
+    this.valor$ = this.service.emissor$
+    .pipe(tap(valor => console.log(this.nome, valor)))
   }
+
 
   ngOnDestroy() {
-    console.log(`${this.nome} foi destruido`);
+    console.log(`${this.nome} Foi destruído`)
   }
-
 }
