@@ -14,7 +14,6 @@ import { CursosListaComponent } from './cursos-lista/cursos-lista.component';
     CommonModule,
     CursosRoutingModule,
     RouterModule,
-
   ],
 })
 export class CursosModule { }
