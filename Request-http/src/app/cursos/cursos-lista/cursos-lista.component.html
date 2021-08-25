@@ -5,10 +5,11 @@
     </div>
     <div class="paraDireita">
       <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Curso</button>
+      <button type="button" class="btn btn-primary" (click)="onRefresh()">Atualizar</button>
     </div>
   </div>
   <div class="card-body">
-    <table class="table" *ngIf="cursos$ | async as cursos; else loading">
+    <table class="table" *ngIf="cursos$ | async as cursos; else loading; ">
       <thead>
         <tr *ngFor="let curso of cursos">
           <th>{{curso.id}}</th>

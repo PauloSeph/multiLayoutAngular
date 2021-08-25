@@ -1,7 +1,8 @@
 import { CursosService } from './services/cursos.service';
 import { Component, OnInit } from '@angular/core';
-import { Curso } from './curso';
-import { Observable } from 'rxjs';
+import { Curso } from '../interface/curso';
+import { empty, Observable, of, Subject, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -13,13 +14,17 @@ export class CursosListaComponent implements OnInit {
 
   cursos$!: Observable<Curso[]>;
 
-
   constructor(
     private serviceCurso: CursosService
   ) { }
 
   ngOnInit(): void {
-    this.cursos$ = this.serviceCurso.lista()
+    this.onRefresh();
+  }
+
+  onRefresh(){
+    this.cursos$ = this.serviceCurso.obter()
   }
 
 }
+

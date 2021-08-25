@@ -1,0 +1,20 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "Rádio"
+    },
+    {
+      "id": 2,
+      "nome": "Câmera Samsumg"
+    },
+    {
+      "id": 3,
+      "nome": "Tv 50 Polegadas"
+    },
+    {
+      "id": 4,
+      "nome": "Joaquin"
+    }
+  ]
+}

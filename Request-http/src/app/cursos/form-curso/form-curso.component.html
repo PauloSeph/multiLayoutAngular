@@ -1,0 +1,28 @@
+<form class="row g-3" [formGroup]="form">
+
+  <div class="col-md-4">
+
+    <label for="nome" class="margem">Nome do Curso</label>
+    <input
+      type="text"
+      class="form-control"
+      id="nome"
+      placeholder="Digite o nome do curso"
+      formControlName="nome"
+      [ngClass]="{}"
+    />
+
+    <div class="invalid-feedback" *ngIf="hasError('nome')">
+      Por favor informe um nome para o curso
+    </div>
+  </div>
+
+  <div class="margem">
+    <button (click)="onSubmit()" type="submit" class="btn btn-primary">
+      Salvar
+    </button>
+    <button (click)="onCancel()" type="button" class="btn btn-default">
+      Cancelar
+    </button>
+  </div>
+</form>
