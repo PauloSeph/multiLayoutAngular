@@ -11,7 +11,10 @@ export class AlertModalComponent implements OnInit {
   @Input() message!: string;
   @Input() tipo = 'primary'
 
-  constructor(public bsModalRef: BsModalRef) { }
+  constructor() {}
+
+
 
   ngOnInit(): void {}
+
 }

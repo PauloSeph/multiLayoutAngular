@@ -5,3 +5,20 @@
 
 <p>Valor {{nome.value}}</p>
 
+<form #variavel="ngForm">
+  <div>
+     {{variavel.controls['nomeDoControle'].valid}}
+  </div>
+
+  <input
+  type="text"
+  name="nome"
+  ngModel
+  #campoNome = ngModel
+  >
+  <div>{{campoNome.valid}}</div>
+
+</form>
+
+
+

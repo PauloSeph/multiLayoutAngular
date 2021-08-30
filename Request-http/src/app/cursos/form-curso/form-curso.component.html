@@ -9,12 +9,27 @@
       id="nome"
       placeholder="Digite o nome do curso"
       formControlName="nome"
-      [ngClass]="{}"
+      [ngClass]="{ 'is-invalid': hasError('nome') && submitted}"
     />
 
-    <div class="invalid-feedback" *ngIf="hasError('nome')">
-      Por favor informe um nome para o curso
-    </div>
+
+
+      <div class="invalid-feedback"
+       *ngIf="hasError('nome') && hasError('nome')?.required">
+        Informe o nome para o Curso
+      </div>
+
+      <div class="invalid-feedback"
+       *ngIf="hasError('nome') && hasError('nome')?.minlength">
+        Precisar ter no minimo {{hasError('nome')?.minlength.requiredLength}} caracteres.
+      </div>
+
+      <div class="invalid-feedback"
+       *ngIf="hasError('nome') && hasError('nome')?.maxlength">
+        Pode ter no máximo {{hasError('nome')?.maxlength.requiredLength}} caracteres.
+      </div>
+
+
   </div>
 
   <div class="margem">

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
+import { CursosService } from '../services/cursos.service';
 
 @Component({
   selector: 'app-form-curso',
@@ -10,14 +13,35 @@ export class FormCursoComponent implements OnInit {
 
   public form!: FormGroup;
 
-  constructor(private formbuilder: FormBuilder) { }
+  constructor(
+    private formbuilder: FormBuilder,
+    private serviceHttp: CursosService,
+    private route: ActivatedRoute
+    ) { }
 
   submitted = false;
 
   ngOnInit(): void {
 
+    // this.route.params
+    // .pipe(
+    //   map( (parametros: any) => {
+    //     return parametros.id
+    //   }),
+    //   switchMap(id => {
+    //     return this.serviceHttp.getById(id)
+    //   })
+    // )
+    // .subscribe( (curso: any) => {
+    //   this.updateForm(curso)
+    // })
+
+    const curso = this.route.snapshot.data.curso;
+
+
     this.form = this.formbuilder.group({
-      nome: [null,
+      id: [curso.id],
+      nome: [curso.nome,
         [
         Validators.required,
         Validators.minLength(3),
@@ -25,14 +49,24 @@ export class FormCursoComponent implements OnInit {
       ]
     ]
     })
-
   }
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.form.value)
+
     if(this.form.valid){
-      console.log('submit')
+
+      let msgSucess = 'Curso criado com sucesso';
+      let msgErro = 'Erro ao criar curso, tente novamente'
+      if(this.form.value.id){
+        msgSucess = 'Curso Atualizado com Sucesso!';
+        msgErro = 'Erro ao atualizar curso, tente novamente'
+      }
+
+      this.serviceHttp.save(this.form.value).subscribe(
+        sucesso => {console.log(msgSucess)},
+        error => {console.log(msgErro)}
+      )
     }
   }
 
@@ -42,9 +76,14 @@ export class FormCursoComponent implements OnInit {
 
   }
 
-  hasError(field: any) {
-    let campoNome = this.form.get(field)
-
-    return campoNome?.errors && campoNome.valid
+  hasError(campo: any) {
+    return this.form.get(campo)?.errors
   }
+
+  // updateForm( curso: any) {
+  //   this.form.patchValue({
+  //     id: curso.id,
+  //     nome: curso.nome
+  //   })
+  // }
 }
